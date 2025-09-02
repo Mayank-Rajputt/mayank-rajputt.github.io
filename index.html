@@ -801,46 +801,83 @@
         @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-            .hero-text {
-                max-width: 100%;
-            }
-            #about .container {
-                flex-direction: column;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            h2 { font-size: 2rem; }
-            .nav-menu {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 70px;
-                right: 0;
-                width: 100%;
-                background-color: var(--nav-bg-color);
-                backdrop-filter: blur(10px);
-                padding: 20px 0;
-            }
-            .nav-menu.active {
-                display: flex;
-            }
-            .nav-item { margin: 10px 0; text-align: center; }
-            .menu-toggle { display: block; }
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item.right { left: 0%; }
-            .timeline-item::after { left: 15px; }
-            .contact-grid { grid-template-columns: 1fr; }
-            .modal-body { flex-direction: column; }
-            .modal-image { width: 100%; }
-        }
-
+        /* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+    .hero-content, #about .container {
+        flex-direction: column-reverse; /* Stacks image on top for hero section */
+        text-align: center;
+        gap: 30px;
+    }
+    .hero-text {
+        max-width: 100%;
+    }
+    .hero-image-container {
+        width: 250px;
+        height: 250px;
+    }
+    #about .container {
+        flex-direction: column; /* Stacks image on top for about section */
+    }
+    .about-image {
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr; /* Ensures contact form and map stack */
+    }
+}
+@media (max-width: 768px) {
+    h2 {
+        font-size: 2rem;
+    }
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        width: 100%;
+        background-color: var(--nav-bg-color);
+        backdrop-filter: blur(10px);
+        padding: 20px 0;
+        box-shadow: 0 4px 6px var(--shadow-color);
+    }
+    .nav-menu.active {
+        display: flex;
+    }
+    .nav-item {
+        margin: 10px 0;
+        text-align: center;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .timeline::after {
+        left: 31px; /* Adjusts timeline vertical bar */
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item.right {
+        left: 0%; /* Aligns all timeline items to the left */
+    }
+    .timeline-item::after {
+        left: 15px; /* Aligns dot on the left side */
+    }
+    .modal-body {
+        flex-direction: column; /* Stacks modal image and text */
+    }
+    .modal-image {
+        width: 100%;
+        height: auto;
+    }
+    .project-card {
+        max-width: 100%;
+    }
+}
 /*=============== RESUME VIEWER STYLES ===============*/
 .resume-viewer {
     background-color: var(--container-color);
@@ -1153,35 +1190,33 @@
         
         <!-- Contact Section -->
         <section id="contact">
-            <div class="container">
-                <h2>Get In Touch</h2>
-                <div class="contact-grid">
-                    <div class="contact-form slide-in-left">
-                         <!-- IMPORTANT: The action and method attributes are required for Web3Forms -->
+    <div class="container">
+        <h2>Get In Touch</h2>
+        <div class="contact-grid">
+            <div class="contact-form slide-in-left">
                 <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
                     <input type="hidden" name="access_key" value="6d151b61-87bb-4577-bd05-003d5aa5ffb6">
-                        <form id="contactForm">
-                            <div class="form-group">
-                                <input type="text" id="name" name="name" placeholder="Your Name" required>
-                            </div>
-                             <div class="form-group">
-                                <input type="email" id="email" name="email" placeholder="Your Email" required>
-                            </div>
-                             <div class="form-group">
-                                <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
-                            </div>
-                            <button type="submit" class="btn">Send Message</button>
-                        </form>
-                        <div id="successMessage" class="success-message">
-                            🎉 Thank you! Your message has been sent. I'll get back to you soon.
-                        </div>
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
                     </div>
-                    <div class="contact-map slide-in-right">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d223359.80335148916!2d77.53414416652663!3d28.98746206321651!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c64f457b66325%3A0x42faa83387a6be5e!2sMeerut%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1756548730626!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
                     </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" rows="6" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+                <div id="successMessage" class="success-message">
+                    🎉 Thank you! Your message has been sent. I'll get back to you soon.
                 </div>
             </div>
-        </section>
+            <div class="contact-map slide-in-right">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3493.593409192453!2d77.6705572750372!3d28.87859846875069!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390c58e6583d717f%3A0x6b16e021464c23f5!2sDIMS%2C%20Meerut!5e0!3m2!1sen!2sin!4v1709292868289!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</section>
     </main>
     
     <!-- Testimonials Section -->
@@ -1680,3 +1715,4 @@
     </script>
 </body>
 </html>
+
